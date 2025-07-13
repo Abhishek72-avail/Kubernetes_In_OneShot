@@ -55,6 +55,7 @@
 ---
 
 ## Kubernetes Architecture
+![Kubernetes Architecture Diagram](https://miro.medium.com/v2/resize:fit:1400/1*0Sudxeu5mQyN3ahi1FV49A.png)
 
 ### Control Plane Components
 
