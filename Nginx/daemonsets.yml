@@ -1,0 +1,29 @@
+# 1. kubectl apply -f daemonsets.yml
+# 2. kubectl get daemonsets -n nginx
+# 3. kubectl get pod
+# 4. kubectl delete -f daemonsets.yml
+
+# ---------------------------------------------------------------------------------------------------------|
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemonset
+  labels:
+    app: nginx
+spec:
+  # replicas: 3 removed for daemonset
+  # DaemonSet does not use replicas, it runs one pod on each node
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
