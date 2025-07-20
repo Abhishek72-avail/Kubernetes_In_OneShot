@@ -1,0 +1,28 @@
+# running the following commands will help you set up an Nginx deployment in Kubernetes.
+#  2002  kubectl create namespace nginx
+#  2003  kubectl apply -f deployment.yml
+#  2004  kubectl get ns
+#  2005  kubectl get pods
+#  2006  kubectl get pods -n nginx
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata: 
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
