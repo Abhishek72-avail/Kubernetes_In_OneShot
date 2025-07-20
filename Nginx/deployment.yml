@@ -1,9 +1,34 @@
-# running the following commands will help you set up an Nginx deployment in Kubernetes.
+# ---------------------------------------------------------------------------------------------------------|
+#         1.running the following commands will help you set up an Nginx deployment in Kubernetes.#        |
+# ---------------------------------------------------------------------------------------------------------|
 #  2002  kubectl create namespace nginx
 #  2003  kubectl apply -f deployment.yml
 #  2004  kubectl get ns
 #  2005  kubectl get pods
 #  2006  kubectl get pods -n nginx
+
+# ---------------------------------------------------------------------------------|
+#                2. Scale a replicas :5 / commands                                 |
+# ---------------------------------------------------------------------------------|
+# kubectl scale deployment nginx-deployment --replicas=5 -n nginx
+# kubectl get pod -n nginx
+
+# ---------------------------------------------------------------------------------|
+# 3.Rolling Update  old --> New version  New --> Old Version Nginx Deployment      |  
+# ---------------------------------------------------------------------------------|
+# kubectl set image deployment/nginx-deployment nginx=nginx:1.19.10 -n nginx           [old version]
+# kubectl get pods -n nginx                                                           [check the status of pods]
+# kubectl rollout status deployment/nginx-deployment -n nginx                        [rollout status]
+# kubectl set image deployment/nginx-deployment nginx=nginx:latest -n nginx          [latest image]
+# kubectl rollout history deployment/nginx-deployment -n nginx                      [check history of deployment]
+# kubectl rollout undo deployment/nginx-deployment -n nginx                        [undo to old version]
+
+# ---------------------------------------------------------------------------------|
+# 4. Delete the Nginx deployment and namespace                                     |
+# ---------------------------------------------------------------------------------|
+# kubectl delete deployment nginx-deployment -n nginx
+# kubectl delete namespace nginx
+
 
 apiVersion: apps/v1
 kind: Deployment
