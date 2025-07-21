@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-example
+spec:
+  schedule: "*/1 * * * *"   # every 1 minute
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mycronjob
+            image: busybox
+            command: ["echo", "CronJob ran successfully"]
+          restartPolicy: OnFailure
+
+
+# kubectl apply -f job.yml        # for one-time Job
+# kubectl apply -f cronjob.yml    # for scheduled CronJob
+# kubectl get jobs
+# kubectl get cronjobs
+# kubectl get pods
+# kubectl describe cronjob cronjob-example
+# kubectl logs <pod-name>         # to view logs of the CronJob pod

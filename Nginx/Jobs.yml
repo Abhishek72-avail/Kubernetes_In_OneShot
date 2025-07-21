@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hello-job
+  namespace: nginx
+spec:
+  completions: 1
+  backoffLimit: 1
+  template:
+  metadata:
+    name: hello-job-pod
+    labels:
+      app: batch-task
+    spec:
+      containers:
+      - name: batch-container
+        image: busybox:latest
+        command: ["echo", "Hello from Kubernetes Job!"]
+      restartPolicy: Never
+
+
+# kubectl apply -f job.yml
+# # 5. kubectl delete -f job.yml
+# kubectl get jobs
+# kubectl describe job hello-job
+# kubectl get pods
+# kubectl logs <pod-name>
