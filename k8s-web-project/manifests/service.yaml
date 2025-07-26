@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-service
+  namespace: web-app
+  labels:
+    app: web-app
+    component: service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+    # Prometheus monitoring
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "3000"
+    # Service mesh annotations
+    service.istio.io/canonical-name: "web-app"
+    service.istio.io/canonical-revision: "v1"
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+    protocol: TCP
+  selector:
+    app: web-app

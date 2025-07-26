@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: web-app
+  labels:
+    name: web-app
+    environment: production
+  annotations:
+    description: "Web application namespace with ingress demo"
+    created-by: "devops-team"
+    version: "1.0.0"
+
